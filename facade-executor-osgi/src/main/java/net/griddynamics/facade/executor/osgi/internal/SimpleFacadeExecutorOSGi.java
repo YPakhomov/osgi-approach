@@ -58,8 +58,7 @@ public class SimpleFacadeExecutorOSGi implements FacadeExecutor {
                       
             
 
-            ServiceTracker serviceTracker = new ServiceTracker(context, facadeInterfaceName, null);
-
+            ServiceTracker serviceTracker = new ServiceTracker(context, facadeInterfaceName, null); // TODO improve
             serviceTracker.open();
 
             Object service = serviceTracker.getService();
@@ -81,7 +80,8 @@ public class SimpleFacadeExecutorOSGi implements FacadeExecutor {
             }
 
             Object invoke = declaredMethod.invoke(service, params);
-
+            
+            serviceTracker.close();
             return invoke;
 
         } catch (NoSuchMethodException ex) {

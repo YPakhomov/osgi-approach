@@ -5,9 +5,9 @@
 package net.griddynamics.productservice.internal;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
 import net.griddynamics.productservice.Product;
@@ -27,17 +27,9 @@ public class SimpleProductService implements ProductService {
     }
 
     private void init() {
-        FileReader sourceFileReader;
+        InputStream prodStream = getClass().getResourceAsStream("/prods.txt");
         try {
-            String sourceName = System.getProperty("user.home") + System.getProperty("file.separator")
-                    + "init-params" + System.getProperty("file.separator") + "prods.txt";
-            sourceFileReader = new FileReader(sourceName);
-        } catch (FileNotFoundException ex) {
-            throw new RuntimeException(ex);
-        }
-
-        try {
-            BufferedReader br = new BufferedReader(sourceFileReader);
+            BufferedReader br = new BufferedReader(new InputStreamReader(prodStream));
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 String[] res = line.split(":");
                 int id = Integer.parseInt(res[0].trim());
