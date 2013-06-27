@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"> 
+    
+    <!-- Simple facade bean -->
+    <bean class="org.springframework.remoting.caucho.HessianProxyFactoryBean" id="simpleFacade"> 
+        <property name="serviceUrl" value="http://localhost:8080/server/SimpleFacade.hessian" /> 
+        <property name="serviceInterface" value="net.griddynamics.api.Facade" /> 
+    </bean> 
+    
+    <!-- ScriptFacade bean -->
+    <bean class="org.springframework.remoting.caucho.HessianProxyFactoryBean" id="scriptFacade"> 
+        <property name="serviceUrl" value="http://localhost:8080/server/ScriptFacade.hessian" /> 
+        <property name="serviceInterface" value="net.griddynamics.api.script.ScriptFacade" /> 
+    </bean> 
+    
+    <!-- Command facade bean -->
+    <bean class="org.springframework.remoting.caucho.HessianProxyFactoryBean" id="commandFacade"> 
+        <property name="serviceUrl" value="http://localhost:8080/server/SimpleCommandFacade.hessian" /> 
+        <property name="serviceInterface" value="net.griddynamics.api.approach3.CommandFacade" /> 
+    </bean> 
+</beans>

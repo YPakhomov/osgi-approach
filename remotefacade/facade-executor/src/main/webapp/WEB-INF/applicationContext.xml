@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/osgi
+                           http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"> 
+    
+    <!-- Simple facade approach -->
+    
+    <osgi:reference id="service" interface="net.griddynamics.facade.executor.api.FacadeExecutor"/>
+   
+    <bean name="/facadeexecutor.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter" > 
+        <property name="service" ref="service"/> 
+        <property name="serviceInterface" value="net.griddynamics.facade.executor.api.FacadeExecutor"/> 
+    </bean> 
+    
+</beans>

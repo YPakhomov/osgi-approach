@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.griddynamics</groupId>
+    <artifactId>remotefacade</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>remotefacade</name>
+    
+    <modules>
+        <module>api</module>
+        <module>server</module>
+        <module>client</module>
+        <module>facade-executor-api</module>
+        <module>StoreService</module>
+        <module>ProductService</module>
+        <module>SimpleFacadeA</module>
+        <module>SimpleFacadeB</module>
+        <module>facade-executor-osgi</module>
+        <module>facade-executor</module>
+        <module>client-osgi</module>
+    </modules>
+    
+    <properties>
+        <jetty.port>8080</jetty.port>
+        <spring.framework.version>3.2.2.RELEASE</spring.framework.version>
+    </properties>
+</project>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"> 
+    
+    <bean id="simpleProductService" class="net.griddynamics.server.services.SimpleProductService"/>
+    <bean id="simpleStoreService" class="net.griddynamics.server.services.SimpleStoreService"/>  
+     
+    <!-- Simple facade approach -->
+    
+    <bean id="simpleFacade" class="net.griddynamics.server.SimpleFacade">
+        <property name="productService"><ref bean="simpleProductService"/></property>
+        <property name="storeService"><ref bean="simpleStoreService"/></property> 
+    </bean>
+    
+    <bean name="/SimpleFacade.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter" > 
+        <property name="service" ref="simpleFacade"/> 
+        <property name="serviceInterface" value="net.griddynamics.api.Facade"/> 
+    </bean> 
+    
+    
+    <!-- Script engine approach -->
+    <bean id="scriptFacade" class="net.griddynamics.server.SimpleScriptFacade">
+        <property name="productService"><ref bean="simpleProductService"/></property>
+        <property name="storeService"><ref bean="simpleStoreService"/></property> 
+    </bean> 
+        
+    <bean name="/ScriptFacade.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter" > 
+        <property name="service" ref="scriptFacade"/> 
+        <property name="serviceInterface" value="net.griddynamics.api.script.ScriptFacade"/> 
+    </bean> 
+    
+    
+    <!-- Comman facade Approach3 -->
+    
+    <bean id="serverContextBean" class="net.griddynamics.server.ServerContext">
+        <property name="productService"><ref bean="simpleProductService"/></property>
+        <property name="storeService"><ref bean="simpleStoreService"/></property> 
+    </bean>
+    
+    <bean id="simpleCommandFacade" class="net.griddynamics.server.SimpleCommandFacade">
+        <property name="context" ref="serverContextBean"/>
+    </bean> 
+    
+    <bean name="/SimpleCommandFacade.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter" > 
+        <property name="service" ref="simpleCommandFacade"/> 
+        <property name="serviceInterface" value="net.griddynamics.api.approach3.CommandFacade"/> 
+    </bean>
+     
+</beans>
+
+
