@@ -39,7 +39,7 @@
                         <Bundle-Activator>net.griddynamics.storeservice.internal.Activator</Bundle-Activator>
                         <Import-Package>
                             org.osgi.framework;version="[1.6,2)",
-                            net.griddynamics.api.servicesinterfaces;version="1.0.0",
+                            net.griddynamics.api.services;version="1.0.0",
                             net.griddynamics.api
                         </Import-Package>
                         <Export-Package>net.griddynamics.storeservice</Export-Package>

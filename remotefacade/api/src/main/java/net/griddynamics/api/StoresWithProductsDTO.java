@@ -1,5 +1,7 @@
 package net.griddynamics.api;
 
+import net.griddynamics.api.services.Product;
+import net.griddynamics.api.services.Store;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

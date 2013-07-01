@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Set;
 import net.griddynamics.api.Facade;
 import net.griddynamics.api.StoresWithProductsDTO;
-import net.griddynamics.api.Product;
-import net.griddynamics.api.Store;
-import net.griddynamics.api.servicesinterfaces.ProductService;
-import net.griddynamics.api.servicesinterfaces.StoreService;
+import net.griddynamics.api.services.Product;
+import net.griddynamics.api.services.Store;
+import net.griddynamics.api.services.ProductService;
+import net.griddynamics.api.services.StoreService;
 import net.griddynamics.server.services.SimpleProductService;
 import org.springframework.beans.factory.annotation.Required;
 

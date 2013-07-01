@@ -6,7 +6,7 @@ package net.griddynamics.api.approach3.commands;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.griddynamics.api.Store;
+import net.griddynamics.api.services.Store;
 import net.griddynamics.api.approach3.Visitor;
 
 /**

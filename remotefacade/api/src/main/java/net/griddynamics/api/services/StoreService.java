@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.griddynamics.api.servicesinterfaces;
+package net.griddynamics.api.services;
 
 import java.util.Set;
-import net.griddynamics.api.Store;
 
 /**
  *

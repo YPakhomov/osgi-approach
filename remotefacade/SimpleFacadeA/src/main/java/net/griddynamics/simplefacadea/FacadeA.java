@@ -5,7 +5,7 @@
 package net.griddynamics.simplefacadea;
 
 import java.util.List;
-import net.griddynamics.api.Product;
+import net.griddynamics.api.services.Product;
 
 
 /**

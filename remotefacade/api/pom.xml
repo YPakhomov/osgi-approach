@@ -37,14 +37,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>
-                            net.griddynamics.api,
-                            net.griddynamics.api.approach3,
-                            net.griddynamics.api.approach3.commands,
-                            net.griddynamics.api.approach3.commands.utils,
-                            net.griddynamics.api.script,
-                            net.griddynamics.api.servicesinterfaces
-                        </Export-Package>
+                        <Export-Package>net.griddynamics.api,net.griddynamics.api.approach3,net.griddynamics.api.approach3.commands,net.griddynamics.api.approach3.commands.utils,net.griddynamics.api.script,net.griddynamics.api.services</Export-Package>
                         <Private-Package>net.griddynamics.api.*,net.griddynamics.api.approach3.commands.utils.*</Private-Package>
                     </instructions>
                 </configuration>

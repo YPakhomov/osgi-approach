@@ -4,8 +4,8 @@
  */
 package net.griddynamics.api.approach3;
 
-import net.griddynamics.api.servicesinterfaces.ProductService;
-import net.griddynamics.api.servicesinterfaces.StoreService;
+import net.griddynamics.api.services.ProductService;
+import net.griddynamics.api.services.StoreService;
 
 /**
  *

@@ -1,6 +1,6 @@
 package net.griddynamics.storeservice.internal;
 
-import net.griddynamics.api.servicesinterfaces.StoreService;
+import net.griddynamics.api.services.StoreService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 

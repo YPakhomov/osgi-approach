@@ -1,7 +1,7 @@
 package net.griddynamics.simplefacadea.internal;
 
 
-import net.griddynamics.api.servicesinterfaces.ProductService;
+import net.griddynamics.api.services.ProductService;
 import net.griddynamics.simplefacadea.FacadeA;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

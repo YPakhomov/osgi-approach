@@ -8,8 +8,6 @@
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:osgi="http://www.springframework.org/schema/osgi"> 
     
-    <!-- Simple facade approach -->
-    
     <osgi:reference id="service" interface="net.griddynamics.facade.executor.api.FacadeExecutor"/>
    
     <bean name="/facadeexecutor.hessian" class="org.springframework.remoting.caucho.HessianServiceExporter" > 

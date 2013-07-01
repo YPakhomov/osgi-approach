@@ -5,7 +5,7 @@
 package net.griddynamics.api.approach3.commands.utils;
 
 
-import net.griddynamics.api.Product;
+import net.griddynamics.api.services.Product;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

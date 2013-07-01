@@ -4,6 +4,7 @@
  */
 package net.griddynamics.api;
 
+import net.griddynamics.api.services.Product;
 import java.util.List;
 
 /**

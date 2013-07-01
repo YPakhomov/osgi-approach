@@ -6,9 +6,9 @@ package net.griddynamics.simplefacadea.internal;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.griddynamics.api.Product;
-import net.griddynamics.api.servicesinterfaces.ProductService;
-import net.griddynamics.api.servicesinterfaces.StoreService;
+import net.griddynamics.api.services.Product;
+import net.griddynamics.api.services.ProductService;
+import net.griddynamics.api.services.StoreService;
 import net.griddynamics.simplefacadea.FacadeA;
 
 /**

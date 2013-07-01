@@ -9,8 +9,8 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import net.griddynamics.api.script.ScriptFacade;
 import net.griddynamics.api.ServiceException;
-import net.griddynamics.api.servicesinterfaces.ProductService;
-import net.griddynamics.api.servicesinterfaces.StoreService;
+import net.griddynamics.api.services.ProductService;
+import net.griddynamics.api.services.StoreService;
 import org.springframework.beans.factory.annotation.Required;
 
 

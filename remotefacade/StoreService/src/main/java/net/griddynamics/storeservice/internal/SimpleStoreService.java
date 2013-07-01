@@ -11,8 +11,9 @@ import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import net.griddynamics.api.Store;
-import net.griddynamics.api.servicesinterfaces.StoreService;
+import net.griddynamics.api.services.Store;
+import net.griddynamics.api.services.StoreService;
+
 
 
 /**
