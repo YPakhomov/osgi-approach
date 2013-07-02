@@ -40,26 +40,16 @@ public class SimpleFacade implements Facade{
     }
 
     @Override
-    public StoresWithProductsDTO findStoresWithProducts(List<Integer> ids) {
-        Set<Store> stores = storeService.getAllStores();
-        Set<Product> products = new HashSet<Product>(getProducts(ids));
-        
-        List<Store> resultStores = new ArrayList<Store>();
-        
-        for(Store s : stores){
-            boolean containsAll = true;
-            Set<Product> productsInCurrentStore = new HashSet<Product>(getProducts(new ArrayList(s.getProducts())));
-            for(Product prod : products){
-                if( ! productsInCurrentStore.contains(prod)){
-                    containsAll = false;
-                    break;
-                }
-            }
-            if(containsAll){
-                resultStores.add(s);
-            }
+    public StoresWithProductsDTO findStoresWithProducts(List<String> productsName) {
+        List<Product> products = new ArrayList<Product>(productsName.size());
+        List<Integer> productIds = new ArrayList<Integer>(productsName.size());
+        for(String name : productsName){
+            Product productByName = productService.getProductByName(name);
+            products.add(productByName);
+            productIds.add(productByName.getId());
         }
-        return new StoresWithProductsDTO(new ArrayList<Product>(products), resultStores);
+        List<Store> storesWithProducts = new ArrayList<Store>(storeService.getStoresWithProducts(productIds));
+        return new StoresWithProductsDTO(products, storesWithProducts);
     }
     
     @Required

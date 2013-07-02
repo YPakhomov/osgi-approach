@@ -15,6 +15,6 @@ public interface Facade {
     
     public List<Product> getProducts(List<Integer> ids);
     
-    public StoresWithProductsDTO findStoresWithProducts(List<Integer> ids);
+    public StoresWithProductsDTO findStoresWithProducts(List<String> productsName);
     
 }
