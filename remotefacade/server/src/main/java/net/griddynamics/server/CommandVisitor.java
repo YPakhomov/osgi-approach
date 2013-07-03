@@ -17,8 +17,9 @@ import net.griddynamics.api.approach3.commands.CommandList;
 import net.griddynamics.api.approach3.commands.FindAppropriateStores;
 import net.griddynamics.api.approach3.commands.GetProductByIDCommand;
 import net.griddynamics.api.approach3.commands.GetProducts;
+import net.griddynamics.api.approach3.commands.GetProductsByName;
 import net.griddynamics.api.approach3.commands.utils.TransformList;
-import net.griddynamics.server.services.SimpleProductService;
+import net.griddynamics.productservice.internal.SimpleProductService;
 
 
 /**
@@ -49,9 +50,7 @@ public class CommandVisitor<T> implements Visitor {
     @Override
     public void visit(CommandList cmdList) {
         List<Command<?>> commands = cmdList.getCommandList();
-
         List<Command<?>> resultList = new ArrayList<Command<?>>(commands.size());
-
         for (Command c : commands) {
             c.accept(this);
             resultList.add(c);
@@ -63,11 +62,8 @@ public class CommandVisitor<T> implements Visitor {
     public void visit(GetProducts getProducts) {
         Command<List<Integer>> idsCommand = getProducts.getIdsCommand();
         idsCommand.accept(this);
-
         List<Integer> idList = idsCommand.getResult();
-        
         List<Product> resultList = new ArrayList<Product>(idsCommand.getResult().size());
-        
         for (Integer id : idsCommand.getResult()) {
             Product product = context.getProductService().getProductByID(id);
             if( ! product.equals(SimpleProductService.NOT_FOUND)){
@@ -81,42 +77,31 @@ public class CommandVisitor<T> implements Visitor {
     public void visit(FindAppropriateStores findCommand) {
         Command<List<Integer>> idCommand = findCommand.getProductsIDList();
         idCommand.accept(this);
-        
-        
         Set<Integer> ids = new HashSet<Integer>(idCommand.getResult());
         Set<Store> stores = context.getStoreService().getAllStores();
-        
-        List<Store> resultStores = new ArrayList<Store>();
-        
-        for (Store s : stores) {
-            boolean containsAll = true;
-            Set<Integer> products = new HashSet<Integer>(s.getProducts());
-            for (Integer i : ids) {
-                if (!products.contains(i)) {
-                    containsAll = false;
-                    break;
-                }
-            }
-            if(containsAll){
-               resultStores.add(s);
-            }
-        }
+        List<Store> resultStores = new ArrayList<Store>(
+                context.getStoreService().getStoresWithProducts(idCommand.getResult()));
         findCommand.setResult(resultStores);
     }
 
     @Override
     public void visit(TransformList transformList) {
         Command sourceCommand = transformList.getSource();
-       
         sourceCommand.accept(this);
+        List sourceList = (List)sourceCommand.getResult();
+        List resultList = new ArrayList(sourceList.size());
         
-        List sourseList = (List)sourceCommand.getResult();
-        List resultList = new ArrayList(sourseList.size());
-        
-        for(Object o : sourseList){
+        for(Object o : sourceList){
             resultList.add(transformList.getMapper().apply(o));
-        }
-        
+        }        
         transformList.setResult(resultList);        
+    }
+
+    @Override
+    public void visit(GetProductsByName getProductsByName) {
+        Command<String> productNameSubstringCommand = getProductsByName.getProductNameSubstringCommand(); 
+        productNameSubstringCommand.accept(this);
+        List<Product> resultProducts = context.getProductService().getProductsByName(productNameSubstringCommand.getResult());
+        getProductsByName.setResult(resultProducts);
     }
 }

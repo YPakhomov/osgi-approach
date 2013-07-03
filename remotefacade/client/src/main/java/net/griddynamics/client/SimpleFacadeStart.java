@@ -4,7 +4,6 @@
  */
 package net.griddynamics.client;
 
-import java.util.Arrays;
 import net.griddynamics.api.Facade;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,6 +19,6 @@ public class SimpleFacadeStart {
         ApplicationContext context = new ClassPathXmlApplicationContext("client-beans.xml");
         Facade f = context.getBean("simpleFacade", Facade.class);
         
-        System.out.println(f.findStoresWithProducts(Arrays.asList(1,2,3)));
+        System.out.println(f.findStoresWithProducts("twix"));
     }
 }

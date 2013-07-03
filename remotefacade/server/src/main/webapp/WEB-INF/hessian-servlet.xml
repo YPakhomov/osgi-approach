@@ -5,8 +5,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"> 
     
-    <bean id="simpleProductService" class="net.griddynamics.server.services.SimpleProductService"/>
-    <bean id="simpleStoreService" class="net.griddynamics.server.services.SimpleStoreService"/>  
+    <bean id="simpleProductService" class="net.griddynamics.productservice.internal.SimpleProductService"/>
+    <bean id="simpleStoreService" class="net.griddynamics.storeservice.internal.SimpleStoreService"/>  
      
     <!-- Simple facade approach -->
     

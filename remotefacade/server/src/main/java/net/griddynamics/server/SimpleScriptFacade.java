@@ -7,6 +7,7 @@ package net.griddynamics.server;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import net.griddynamics.api.StoresAndProductsDTO;
 import net.griddynamics.api.script.ScriptFacade;
 import net.griddynamics.api.ServiceException;
 import net.griddynamics.api.services.ProductService;

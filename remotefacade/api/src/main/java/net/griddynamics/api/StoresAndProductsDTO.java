@@ -10,12 +10,12 @@ import java.util.List;
  *
  * @author one
  */
-public class StoresWithProductsDTO implements Serializable{
+public class StoresAndProductsDTO implements Serializable{
     
     private List<Product> products;
     private List<Store> stores;
 
-    public StoresWithProductsDTO(List<Product> products, List<Store> stores) {
+    public StoresAndProductsDTO(List<Product> products, List<Store> stores) {
         this.products = products;
         this.stores = stores;
     }

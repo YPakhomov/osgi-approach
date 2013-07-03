@@ -39,4 +39,12 @@
             <activatedProfile>run-on-felix</activatedProfile>
         </activatedProfiles>
     </action>
+    <action>
+            <actionName>CUSTOM-deployToNexus</actionName>
+            <displayName>deployToNexus</displayName>
+            <goals>
+                <goal>deploy</goal>
+                <goal>-DremoteOBR</goal>
+            </goals>
+        </action>
 </actions>

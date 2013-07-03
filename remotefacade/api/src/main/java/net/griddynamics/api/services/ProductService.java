@@ -4,6 +4,7 @@
  */
 package net.griddynamics.api.services;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,6 +17,6 @@ public interface ProductService {
 
     Product getProductByID(int id);
 
-    Product getProductByName(String name);
+    List<Product> getProductsByName(String name);
     
 }

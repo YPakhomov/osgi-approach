@@ -58,7 +58,7 @@ public class SimpleFacadeExecutorOSGi implements FacadeExecutor {
                       
             
 
-            ServiceTracker serviceTracker = new ServiceTracker(context, facadeInterfaceName, null); // TODO improve
+            ServiceTracker serviceTracker = new ServiceTracker(context, facadeInterfaceName, null); 
             serviceTracker.open();
 
             Object service = serviceTracker.getService();

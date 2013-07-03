@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import net.griddynamics.api.Facade;
 import net.griddynamics.api.ServiceException;
-import net.griddynamics.api.StoresWithProductsDTO;
+import net.griddynamics.api.StoresAndProductsDTO;
 import net.griddynamics.api.services.Product;
 import net.griddynamics.api.services.Store;
 import net.griddynamics.api.script.ScriptFacade;
@@ -89,79 +89,45 @@ public class ScriptFacadeTest {
 
     @Test
     public void StoresWithProductsTest() throws ServiceException {
-        
-        List<Integer> ids = Arrays.asList(1, 2);
-        StoresWithProductsDTO storesWithProducts = simpleFacade.findStoresWithProducts(ids);
+
+        StoresAndProductsDTO storesWithProducts = simpleFacade.findStoresWithProducts("twix");
         List<Store> expectedStores = storesWithProducts.getStores();
-        
+        List<Product> expectedProducts = storesWithProducts.getProducts();
+
         ApplicationContext context = new ClassPathXmlApplicationContext("client-beans.xml");
         ScriptFacade scriptFacade = context.getBean("scriptFacade", ScriptFacade.class);
 
         Object scriptResult = scriptFacade.runScript(""
-                + "import net.griddynamics.api.StoresWithProductsDTO\n"
-                + "def resultProducts = []\n"
-                + "def resultStores = []\n"
-                + "def idList = [1,2]\n"
-                + "for(id in idList){\n"
-                + "    tmpProduct = productService.getProductByID(id)\n"
-                + "    if(tmpProduct.id != 0){ \n"
-                + "        resultProducts.add(tmpProduct)\n"
-                + "    }\n"
+                + "def productIds = []\n"
+                + "def resultProducts = productService.getProductsByName(\"twix\")\n"
+                + "for(p in resultProducts){\n"
+                + "    productIds.add(p.getId())\n"
                 + "}\n"
-                + "def stores = storeService.getAllStores()\n"
-                + "for(s in stores){\n"
-                + "    def containsAll = true\n"
-                + "    def products = new HashSet(s.getProducts())\n"
-                + "    for(id in idList){\n"
-                + "        if(!products.contains(id)){\n"
-                + "            containsAll = false;\n"
-                + "            break;\n"
-                + "        }\n"
-                + "    }\n"
-                + "    if(containsAll){\n"
-                + "        resultStores.add(s)\n"
-                + "    }\n"
-                + "}\n"
-                + "new StoresWithProductsDTO(resultProducts, resultStores)");
+                + "def resultStores = storeService.getStoresWithProducts(productIds)\n"
+                + "new net.griddynamics.api.StoresAndProductsDTO(resultProducts, new ArrayList(resultStores))\n");
 
-        
-        List<Store> resultStores = ((StoresWithProductsDTO)scriptResult).getStores();
+
+        List<Store> resultStores = ((StoresAndProductsDTO) scriptResult).getStores();
+        List<Product> resultProducts = ((StoresAndProductsDTO) scriptResult).getProducts();
         assertEquals(expectedStores, resultStores);
+        assertEquals(expectedProducts, resultProducts);
     }
 }
-
 //script template
 //---------------------------------------------
 //import net.griddynamics.server.services.SimpleProductService
-//import net.griddynamics.api.StoresWithProductsDTO
-//import net.griddynamics.storeservice.internal.SimpleStoreService
+//import net.griddynamics.api.StoresAndProductsDTO
+//import net.griddynamics.server.services.SimpleStoreService
+//
 //
 //def storeService = new SimpleStoreService();
 //def productService = new SimpleProductService();
 //
 ////---------copy from this point--------------
-//
-//def resultProducts = []
-//def resultStores = []
-//def idList = [1,2,3,4,5]
-//for(id in idList){
-//    tmpProduct = productService.getProductByID(id)
-//    if(tmpProduct.id != 0){ 
-//        resultProducts.add(tmpProduct)
-//    }
+//def productIds = []
+//def resultProducts = productService.getProductByName("twix")
+//for(p in resultProducts){
+//    productIds.add(p.getId())
 //}
-//def stores = storeService.getAllStores()
-//for(s in stores){
-//    def containsAll = true
-//    def products = new HashSet(s.getProducts())
-//    for(id in idList){
-//        if(!products.contains(id)){
-//            containsAll = false;
-//            break;
-//        }
-//    }
-//    if(containsAll){
-//        resultStores.add(s)
-//    }
-//}
-//new StoresWithProductsDTO(resultProducts, resultStores)
+//def resultStores = storeService.getStoresWithProducts(productIds)
+//new net.griddynamics.api.StoresAndProductsDTO(resultProducts, new ArrayList(resultStores))

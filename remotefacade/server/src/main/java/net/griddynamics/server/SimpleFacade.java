@@ -5,16 +5,14 @@
 package net.griddynamics.server;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import net.griddynamics.api.Facade;
-import net.griddynamics.api.StoresWithProductsDTO;
+import net.griddynamics.api.StoresAndProductsDTO;
 import net.griddynamics.api.services.Product;
 import net.griddynamics.api.services.Store;
 import net.griddynamics.api.services.ProductService;
 import net.griddynamics.api.services.StoreService;
-import net.griddynamics.server.services.SimpleProductService;
+import net.griddynamics.productservice.internal.SimpleProductService;
 import org.springframework.beans.factory.annotation.Required;
 
 /**
@@ -40,16 +38,14 @@ public class SimpleFacade implements Facade{
     }
 
     @Override
-    public StoresWithProductsDTO findStoresWithProducts(List<String> productsName) {
-        List<Product> products = new ArrayList<Product>(productsName.size());
-        List<Integer> productIds = new ArrayList<Integer>(productsName.size());
-        for(String name : productsName){
-            Product productByName = productService.getProductByName(name);
-            products.add(productByName);
-            productIds.add(productByName.getId());
+    public StoresAndProductsDTO findStoresWithProducts(String productsNameSubsting) {
+        List<Product> products = productService.getProductsByName(productsNameSubsting);
+        List<Integer> productIds = new ArrayList<Integer>(products.size());
+        for(Product p : products){
+            productIds.add(p.getId());
         }
         List<Store> storesWithProducts = new ArrayList<Store>(storeService.getStoresWithProducts(productIds));
-        return new StoresWithProductsDTO(products, storesWithProducts);
+        return new StoresAndProductsDTO(products, storesWithProducts);
     }
     
     @Required
