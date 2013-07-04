@@ -97,7 +97,7 @@ public class ScriptFacadeTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("client-beans.xml");
         ScriptFacade scriptFacade = context.getBean("scriptFacade", ScriptFacade.class);
 
-        Object scriptResult = scriptFacade.runScript(""
+        StoresAndProductsDTO scriptResult = (StoresAndProductsDTO)scriptFacade.runScript(""
                 + "def productIds = []\n"
                 + "def resultProducts = productService.getProductsByName(\"twix\")\n"
                 + "for(p in resultProducts){\n"

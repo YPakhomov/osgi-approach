@@ -84,18 +84,25 @@ public class CommandApproachTest {
     @Test
     public void findStoresWithProductsTest() {
         String name = "twix";
-
         StoresAndProductsDTO storesAndProducts = simpleFacade.findStoresWithProducts(name);
         List<Store> expectedStores = storesAndProducts.getStores();
         List<Product> expectedProducts = storesAndProducts.getProducts();
-
+        
         Forward<String> nameSubsting = new Forward<String>(name);
-        Command<List<Product>> existingProducts = new GetProductsByName(nameSubsting);
+        Command<List<Product>> existingProducts =
+                new GetProductsByName(nameSubsting);
+        
         TransformList<Product, Integer> idsOfexistingProducts =
-                new TransformList<Product, Integer>(existingProducts, new GetPropertyFunc<Product, Integer>("id"));
-        FindAppropriateStores resultStoresCommand = new FindAppropriateStores(idsOfexistingProducts);
+                new TransformList<Product, Integer>(existingProducts,
+                new GetPropertyFunc<Product, Integer>("id"));
+        FindAppropriateStores resultStoresCommand =
+                new FindAppropriateStores(idsOfexistingProducts);
 
-        remoteFacadeHelper.executeRemotely(resultStoresCommand, existingProducts);
+        remoteFacadeHelper.executeRemotely(resultStoresCommand, 
+                                            existingProducts);
+        List<Store> stores = resultStoresCommand.getResult();
+        List<Product> products = existingProducts.getResult();
+        
         assertEquals(expectedStores, resultStoresCommand.getResult());
         assertEquals(expectedProducts, existingProducts.getResult());
     }

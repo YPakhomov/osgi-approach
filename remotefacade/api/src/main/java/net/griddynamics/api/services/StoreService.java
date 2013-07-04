@@ -14,7 +14,9 @@ import java.util.Set;
 public interface StoreService {
     
     public Store getStoreByID(int id);
+    
     public Set<Store> getAllStores();
+    
     public Set<Store> getStoresWithProducts(List<Integer> productIds);
     
 }
